@@ -13,7 +13,8 @@
     <div id="width">
       <h1>Welcome to Boxen</h1>
       <div class="code">
-        curl -s <a href="<%= view.script_path %>"><%= view.script_url %></a> | sh
+        curl -s <a href="<%= view.script_path %>"><%= view.script_url %></a> > /tmp/install-boxen; 
+        bash /tmp/install-boxen
       </div>
       <h2> Run this command in your terminal to install Boxen on your machine.</h2>
     </div>
