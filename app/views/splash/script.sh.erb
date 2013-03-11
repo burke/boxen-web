@@ -1,22 +1,35 @@
 set -e
 set -u
 
-# clean up /tmp/gs on exit if we were run like that
-if [ "$0" = "/tmp/gs" ]; then
-    trap 'rm -f /tmp/gs' EXIT
+# clean up /tmp/install-boxen on exit if we were run like that
+if [ "$0" = "/tmp/install-boxen" ]; then
+    trap 'rm -f /tmp/install-boxen' EXIT
 fi
 
+# For some reason it's unable to infer this.
+export BOXEN_REPO_NAME=Shopify/our-boxen
+
+set +e
 OSX_VERSION_CHECK=`sw_vers | grep ProductVersion | cut -f 2 -d ':'  | egrep '10\.8'`
 
 if [ $? != 0 ]; then
     echo 'You must be on Mountain Lion or greater!'
     exit 1
 fi
+set -e
 
 if [ ! -f /usr/bin/gcc ]; then
   printf "%s\n" $'
 You need to have Xcode with Command Line Tools installed before you can
 continue.
+
+If you are at the Ottawa office:
+
+  1. Open Finder and connect to "officeserver"
+  2. Go to Public/XCode
+  3. Install the XCode Command Line Tools
+
+Otherwise:
 
   1. Go to the App Store and install Xcode.
   2. Start Xcode.
@@ -82,4 +95,8 @@ cd $HOME
 echo "
 You're good to go! Make sure to source /opt/boxen/env.sh in your
 shell config if you want all the good stuff to work.
+
+When you've done that, go to ~/src/shopify, and run:
+./script/hello_world
 "
+
