@@ -72,9 +72,11 @@ if [ -d /opt/boxen ]; then
   read -p "--> /opt/boxen already exists. Should I nuke it before proceeding? [y/N] " -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
+    echo
     echo "--> Ok. rm'ing /opt/boxen..."
     sudo rm -rf /opt/boxen
   else
+    echo
     echo "--> Ok. If it error'd before, it might error again."
   fi
 
