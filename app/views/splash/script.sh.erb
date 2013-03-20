@@ -66,6 +66,20 @@ sudo -p "    Password for sudo: " echo "    Sweet, thanks."
 echo "
 --> Making sure /opt/boxen exists and belongs to you."
 
+if [ -d /opt/boxen ]; then
+
+  echo
+  read -p "--> /opt/boxen already exists. Should I nuke it before proceeding? [y/N] " -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    echo "--> Ok. rm'ing /opt/boxen..."
+    sudo rm -rf /opt/boxen
+  else
+    echo "--> Ok. If it error'd before, it might error again."
+  fi
+
+fi
+
 sudo mkdir -p /opt/boxen
 sudo chown $USER:staff /opt/boxen
 
