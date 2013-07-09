@@ -10,7 +10,7 @@ fi
 export BOXEN_REPO_NAME=Shopify/our-boxen
 
 set +e
-OSX_VERSION_CHECK=`sw_vers | grep ProductVersion | cut -f 2 -d ':'  | egrep '10\.8'`
+OSX_VERSION_CHECK=`sw_vers | grep ProductVersion | cut -f 2 -d ':'  | egrep '10\.[8-9]'`
 
 if [ $? != 0 ]; then
     echo 'You must be on Mountain Lion or greater!'
