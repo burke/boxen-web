@@ -82,6 +82,18 @@ if [ -d /opt/boxen ]; then
 
 fi
 
+OSX_MAJOR_VERSION=`echo $OSX_VERSION_CHECK | cut -f 2 -d '.'`
+if [ $OSX_MAJOR_VERSION = 9 ]; then
+  echo "
+--> Mavericks detected - symlinking Ruby includes."
+
+  SYS_RUBY_INCLUDE=/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/include
+  SDK_RUBY_INCLUDE=`xcode-select --print-path`/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/include
+  if [ ! -h $SYS_RUBY_INCLUDE ]; then
+    sudo ln -s $SDK_RUBY_INCLUDE $SYS_RUBY_INCLUDE
+  fi
+fi
+
 sudo mkdir -p /opt/boxen
 sudo chown $USER:staff /opt/boxen
 
